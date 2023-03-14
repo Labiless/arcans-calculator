@@ -1,0 +1,23 @@
+@import "../../../GlobalStyle.less";
+
+input{
+    color: @text-color;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid @title-color;
+    padding: 10px 0px;
+    font-family: @text-font;
+    font-size: 18px;
+    margin: @text-margin;
+    
+    &::placeholder{
+        font-family: @text-font;
+        font-size: 15px;
+        color: @text-color;
+    }
+    
+    &:focus-visible{
+        outline: none;
+    }
+}

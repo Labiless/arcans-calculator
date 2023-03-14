@@ -1,0 +1,22 @@
+@import "../../../GlobalStyle.less";
+
+a{
+    transition: all 0.3s;
+    background-color: @text-color;
+    color: white;
+    font-family: @title-font;
+    text-decoration: none;
+    border-radius: 1000px;
+    font-size: 20px;
+    padding: 10px 20px;
+    display: block;
+    width: fit-content;
+    margin: @text-margin;
+    opacity: 0.5;
+    
+    &.active{
+        background-color: @purple;
+        color: @title-color;
+        opacity: 1;
+    }
+}
