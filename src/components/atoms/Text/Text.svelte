@@ -1,6 +1,6 @@
 <script>
     export let text = "";
-    export let align = "right";
+    export let align = "left";
     export let margin = "0";
 </script>
 

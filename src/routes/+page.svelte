@@ -26,12 +26,25 @@
             placeholder: "Inserisci la tua data di nascita",
         },
     ];
+
+    const arcanoInput = [
+        {
+            type: "result",
+            text: "Carattere",
+            value: "10"
+        },
+        {
+            type: "result",
+            text: "Destino",
+            value: "12"
+        },
+    ]
 </script>
 
 <div class="main-content">
     <!--intro-->
     <div class="intro">
-        <Title text="Arcans Generator" align="left" />
+        <Title text="Arcans Calculator" align="left" />
         <div>
             <Text
                 text="Uno strumento per calcolare i tuoi arcani"
@@ -74,6 +87,15 @@
         text="L’Arcano del Destino rappresentante la fortuna e i pericoli nella vita. Si calcola 
         sommando il numero corrispondente ad ogni lettera del luogo di nascita e i numeri della data di nascita."
         inputData={destinoInput}
+    />
+
+    <!--input destino-->
+    <ArcanInput
+        number="3"
+        title="Arcano degli Arcani"
+        text="E’ l’Arcano che consente di modificare il proprio carattere e plasmare il destino. Si calcola sommando tra loro l’Arcano del Carattere e l’Arcano del Destino."
+        inputData={arcanoInput}   
+        buttonText="Complleta i tuoi Arcani" 
     />
 </div>
 
