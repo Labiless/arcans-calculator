@@ -16,6 +16,7 @@
     export let buttonText = "Next"
     export let inputData = [];
     export let dispatch = "dispatch";
+    export let activeButton = false;
 
     (() => {
         inputData.forEach(data => {
@@ -45,10 +46,10 @@
         {#if type === "text"}
             <InputText on:dispatch={onDispatch} dispatcher={dispatcher} placeholder={placeholder}/>
         {:else if type === "date"}
-            <InputDate on:dispatch={onDispatch} dispatch={dispatcher}/>
+            <InputDate on:dispatch={onDispatch} dispatcher={dispatcher}/>
         {:else if type === "result"}
             <DisplayNumber text={text} value={value}/>
         {/if}
 	{/each}
-    <Button href={href} isActive={false} text={buttonText} />
+    <Button href={href} isActive={activeButton} text={buttonText} />
 </div>

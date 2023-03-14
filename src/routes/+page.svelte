@@ -1,11 +1,25 @@
 <script>
-    import { userInput } from "../components/utils/writable"
+    import { userInput } from "../components/utils/writable";
+    import { wordValue, dateValue, sumNumberPos } from "../components/utils/arcaneCalculator";
 
     import Title from "../components/atoms/Title/Title.svelte";
     import Text from "../components/atoms/Text/Text.svelte";
     import Button from "../components/atoms/Button/Button.svelte";
     import Link from "../components/atoms/Link/Link.svelte";
     import ArcanInput from "../components/molecules/ArcanInput/ArcanInput.svelte";
+
+    $: isName = $userInput?.name?.length >= 3;
+    $: isSurname = $userInput?.surname?.length >= 3;
+    $: isBirthplace = $userInput?.birthplace?.length >= 3;
+    $: isBirthday = $userInput?.birthday?.length === 8;
+
+    $: carattere = wordValue( `${$userInput?.name || ""}${$userInput?.surname || ""}` );
+    $: destino = wordValue( $userInput?.birthplace || "") + dateValue($userInput?.birthday || ""); 
+
+    $: console.log("carattere",carattere);
+    $: console.log("destino", destino);
+
+    // $: console.log($userInput);
 
     const carattereInput = [
         {
@@ -31,16 +45,16 @@
             dispatcher: "birthday"
         },
     ];
-    const arcanoInput = [
+    $: arcanoInput = [
         {
             type: "result",
             text: "Carattere",
-            value: "10"
+            value: carattere > 22 ? sumNumberPos(carattere) : carattere 
         },
         {
             type: "result",
             text: "Destino",
-            value: "12"
+            value: destino > 22 ? sumNumberPos(destino) : destino 
         },
     ];
 </script>
@@ -85,6 +99,7 @@
         inputData={carattereInput}
         href="#destino"
         dispatch="carattere"
+        activeButton={isName && isSurname}
     />
 
     <!--input destino-->
@@ -96,6 +111,7 @@
         sommando il numero corrispondente ad ogni lettera del luogo di nascita e i numeri della data di nascita."
         inputData={destinoInput}
         href="#arcano"
+        activeButton={isName && isSurname && isBirthplace && isBirthday}
     />
 
     <!--input arcano-->
@@ -105,7 +121,12 @@
         title="Arcano degli Arcani"
         text="E’ l’Arcano che consente di modificare il proprio carattere e plasmare il destino. Si calcola sommando tra loro l’Arcano del Carattere e l’Arcano del Destino."
         inputData={arcanoInput}   
-        buttonText="Complleta i tuoi Arcani" 
+        buttonText="Completa i tuoi Arcani" 
+        activeButton={
+        isName && isSurname 
+        && isBirthplace && isBirthday
+        && carattere > 0 && destino > 0
+        }
     />
 </div>
 

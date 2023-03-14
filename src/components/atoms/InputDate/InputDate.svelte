@@ -31,12 +31,11 @@
             return false;
 
         inputValue = isBackspace ? inputValue.slice(0, -1) : (inputValue += c);
-        console.log(inputValue);
         lastInput = dateTemplate(...inputValue.split(""));
         input.value = lastInput;
         dispatch("dispatch", {
             dispatcher,
-            value: input.value,
+            value: inputValue,
         });
     };
 
