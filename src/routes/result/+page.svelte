@@ -7,6 +7,7 @@
     import DisplayTarot from "../../components/molecules/DisplayTarot/DisplayTarot.svelte";
 
     onMount(() => {
+        console.log($calculatedResults);
         document.querySelector("html").style.overflowY = "auto";
     })
 </script>
