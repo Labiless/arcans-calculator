@@ -9,29 +9,30 @@
     onMount(() => {
         console.log($calculatedResults);
         document.querySelector("html").style.overflowY = "auto";
-    })
+    });
 </script>
 
 <div class="main-content">
     <Header href="/" text="Restart" show={true} />
+    <div class="all-tarots">
+        <DisplayTarot
+            title="Carattere"
+            subtitle="Il tuo arcano del"
+            tarotData={getTarot($calculatedResults.carattere)}
+        />
 
-    <DisplayTarot
-        title="Carattere"
-        subtitle="Il tuo arcano del"
-        tarotData={getTarot($calculatedResults.carattere)}
-    />
+        <DisplayTarot
+            title="Destino"
+            subtitle="Il tuo arcano del"
+            tarotData={getTarot($calculatedResults.destino)}
+        />
 
-    <DisplayTarot
-        title="Destino"
-        subtitle="Il tuo arcano del"
-        tarotData={getTarot($calculatedResults.destino)}
-    />
-
-    <DisplayTarot
-        title="Arcano degli Arcani"
-        subtitle="Il tuo"
-        tarotData={getTarot($calculatedResults.arcano)}
-    />
+        <DisplayTarot
+            title="Arcano degli Arcani"
+            subtitle="Il tuo"
+            tarotData={getTarot($calculatedResults.arcano)}
+        />
+    </div>
 </div>
 
 <style lang="less">
