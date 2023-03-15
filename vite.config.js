@@ -5,6 +5,13 @@ import { liveReload } from 'vite-plugin-live-reload'
 export default defineConfig({
 	plugins: [
 		sveltekit(),
-		liveReload('./src', {alwaysReload: true })
-	]
+		liveReload('./src', { alwaysReload: true })
+	],
+	server: {
+		fs: {
+			allow: [
+				'static/img',
+			],
+		},
+	},
 });

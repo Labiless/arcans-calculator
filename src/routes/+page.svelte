@@ -1,12 +1,16 @@
 <script>
-    import { userInput } from "../components/utils/writable";
+    import { onMount } from "svelte";
+
+    import { userInput, calculatedResults } from "../components/utils/writable";
     import { wordValue, dateValue, sumNumberPos } from "../components/utils/arcaneCalculator";
 
+    import Header from "../components/molecules/Header/Header.svelte";
     import Title from "../components/atoms/Title/Title.svelte";
     import Text from "../components/atoms/Text/Text.svelte";
     import Button from "../components/atoms/Button/Button.svelte";
     import Link from "../components/atoms/Link/Link.svelte";
     import ArcanInput from "../components/molecules/ArcanInput/ArcanInput.svelte";
+
 
     $: isName = $userInput?.name?.length >= 3;
     $: isSurname = $userInput?.surname?.length >= 3;
@@ -16,10 +20,13 @@
     $: carattere = wordValue( `${$userInput?.name || ""}${$userInput?.surname || ""}` );
     $: destino = wordValue( $userInput?.birthplace || "") + dateValue($userInput?.birthday || ""); 
 
-    $: console.log("carattere",carattere);
-    $: console.log("destino", destino);
+    $: $calculatedResults.carattere = carattere > 22 ? sumNumberPos(carattere) : carattere;
+    $: $calculatedResults.destino = destino > 22 ? sumNumberPos(destino) : destino;
+    $: $calculatedResults.arcano = $calculatedResults.carattere + $calculatedResults.destino;
 
-    // $: console.log($userInput);
+    onMount(() => {
+        document.querySelector("html").style.overflowY = "hidden";
+    })
 
     const carattereInput = [
         {
@@ -49,17 +56,24 @@
         {
             type: "result",
             text: "Carattere",
-            value: carattere > 22 ? sumNumberPos(carattere) : carattere 
+            value: $calculatedResults.carattere
         },
         {
             type: "result",
             text: "Destino",
-            value: destino > 22 ? sumNumberPos(destino) : destino 
+            value: $calculatedResults.destino
+        },
+        {
+            type: "result",
+            text: "Arcano",
+            value: $calculatedResults.arcano
         },
     ];
 </script>
 
 <div class="main-content">
+    <!--header-->
+    <Header />
     <!--intro-->
     <div class="intro">
         <Title text="Arcans Calculator" align="left" />
@@ -121,7 +135,8 @@
         title="Arcano degli Arcani"
         text="E’ l’Arcano che consente di modificare il proprio carattere e plasmare il destino. Si calcola sommando tra loro l’Arcano del Carattere e l’Arcano del Destino."
         inputData={arcanoInput}   
-        buttonText="Completa i tuoi Arcani" 
+        buttonText="Scopri i tuoi Arcani"
+        href="/result"
         activeButton={
         isName && isSurname 
         && isBirthplace && isBirthday
